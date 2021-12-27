@@ -2,6 +2,8 @@ import React, {useState, useRef} from 'react';
 import TaskList from './TaskList';
 import'./App.css';
 import {v4 as uuidv4} from 'uuid';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 function App() {
   const [tasks, setTasks] = useState([
@@ -45,12 +47,20 @@ function App() {
   }
   
   return (
-    <div className="container">
+    <div className="divContainer">
       <div>{tasks.filter((task) => task.complete == false).length} Task(s) Left</div>
       <div>
-        <input type="text" ref={inputRef} />
-        <button onClick={handleAddTask}>Add Task</button>
-        <button onClick={handleClearCompletedTask}>Clear Completed Task(s)</button>
+        <input type="text" className="form-control" ref={inputRef} />
+        <button type="button" className="btn btn-outline-secondary" onClick={handleAddTask}>Add Task</button>
+        <button type="button" className="btn btn-outline-secondary" onClick={handleClearCompletedTask}>Clear Completed Task(s)</button>
+        <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter
+        </button>
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li><a className="dropdown-item">None</a></li>
+        <li><a className="dropdown-item">Completed</a></li>
+        <li><a className="dropdown-item">Uncompleted</a></li>
+        </ul>
       </div>
       <TaskList taskList={tasks} _setTasks={setTasks} />    
     </div>
