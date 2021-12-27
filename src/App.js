@@ -38,14 +38,19 @@ function App() {
     inputRef.current.value = null;
   }
 
+  const handleClearCompletedTask = () => {
+    const previousTaskList = [...tasks];
+    const filteredTaskList = previousTaskList.filter((task) => task.complete == false)
+    setTasks(filteredTaskList);
+  }
   
   return (
     <div className="container">
-      <div>Task Left</div>
+      <div>{tasks.filter((task) => task.complete == false).length} Task(s) Left</div>
       <div>
         <input type="text" ref={inputRef} />
         <button onClick={handleAddTask}>Add Task</button>
-        <button>Clear Completed Task</button>
+        <button onClick={handleClearCompletedTask}>Clear Completed Task(s)</button>
       </div>
       <TaskList taskList={tasks} _setTasks={setTasks} />    
     </div>

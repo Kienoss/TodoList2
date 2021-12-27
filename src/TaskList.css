@@ -1,5 +1,10 @@
-tr, td{
+tr, td, th{
     border: solid 1px;
+}
+
+.chkbox{
+    text-align: center;
+    vertical-align: middle;
 }
 
 table{

@@ -15,7 +15,7 @@ export default function TaskList({taskList, _setTasks}) {
         const mapTaskList = taskList.map((task, index) => {
             return (
                 <tr key={index}>
-                    <td><input type="checkbox" checked={task.complete} onChange={() => handleCheckboxCheck(task.id)}/></td>
+                    <td className="chkbox"><input type="checkbox" checked={task.complete} onChange={() => handleCheckboxCheck(task.id)}/></td>
                     <td>{task.name}</td>
                 </tr>
             );
@@ -24,6 +24,12 @@ export default function TaskList({taskList, _setTasks}) {
     }
     return (
         <table>
+            <thead>
+                <tr>
+                    <th>Complete</th>
+                    <th>Task Name</th>
+                </tr>
+            </thead>
             <tbody>
                {mappingTaskList()}
             </tbody>
