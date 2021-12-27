@@ -1,6 +1,6 @@
 import React from 'react'
-import "./TaskList.css"
 import 'bootstrap/dist/css/bootstrap.css';
+import "./TaskList.css"
 
 export default function TaskList({taskList, _setTasks}) {
     const handleCheckboxCheck = (id) => {
@@ -17,7 +17,11 @@ export default function TaskList({taskList, _setTasks}) {
         const mapTaskList = taskList.map((task, index) => {
             return (
                 <tr key={index}>
-                    <td scope="row" className="chkbox"><input type="checkbox" checked={task.complete} onChange={() => handleCheckboxCheck(task.id)}/></td>
+                    <td className="col-1">
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" type="checkbox" checked={task.complete} onChange={() => handleCheckboxCheck(task.id)}/>
+                        </div>
+                    </td>
                     <td>{task.name}</td>
                 </tr>
             );
@@ -25,7 +29,7 @@ export default function TaskList({taskList, _setTasks}) {
         return mapTaskList
     }
     return (
-        <table className="table table-striped">
+        <table className="table table-hover">
             <thead>
                 <tr>
                     <th scope="col" className="completeCol">Complete</th>
