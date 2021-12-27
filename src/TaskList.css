@@ -1,13 +1,9 @@
-tr, td, th{
-    border: solid 1px;
-}
 
-.chkbox{
+.chkbox, .completeCol{
     text-align: center;
     vertical-align: middle;
 }
 
 table{
-    margin-top: 10px;
-    border-collapse: collapse;
+    margin-top: 100px;
 }
