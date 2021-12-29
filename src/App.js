@@ -2,10 +2,22 @@ import React, {useState, useRef, useEffect} from 'react';
 import TaskList from './TaskList';
 import'./App.css';
 import {v4 as uuidv4} from 'uuid';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.js';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import { styled } from '@mui/material/styles';
+import '@fontsource/roboto/400.css';
 
 function App() {
+  const Div = styled('div')(({ theme }) => ({
+    ...theme.typography.button,
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(1),
+  }));
+
   const [tasks, setTasks] = useState([
     {
       id: uuidv4(),
@@ -70,24 +82,32 @@ function App() {
     setTemporaryTasks(filteredTaskList);
     setCurrentFilter(filter);
   }
+  const handleChange = (event) => {
+    setCurrentFilter(event.target.value);
+  };
 
   return (
     <div className="divContainer">
-      <div>{tasks.filter((task) => task.complete === false).length} Task(s) Left</div>
-      <div>
-        <input type="text" className="form-control" ref={inputRef} />
-        <button type="button" className="btn btn-outline-secondary" onClick={handleAddTask}>Add Task</button>
-        <button type="button" className="btn btn-outline-secondary" onClick={handleClearCompletedTask}>Clear Completed Task(s)</button>
-        
-        <button className="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Filter
-        </button>
-        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a className="dropdown-item" href="/#" onClick={handleFilter}>None</a></li>
-          <li><a className="dropdown-item" href="/#" onClick={() => handleFilter("completed")}>Completed</a></li>
-          <li><a className="dropdown-item" href="/#" onClick={() => handleFilter("uncompleted")}>Uncompleted</a></li>
-        </ul>
+      <Div>{tasks.filter((task) => task.complete === false).length} Task(s) Left</Div>
+      <TextField id="standard-basic" label="Task Name:" variant="standard" ref={inputRef} />
+      <div className="divInputContainer">
+        <Button size="small" variant="contained" onClick={handleAddTask}>Add Task</Button>
+        <Button size="small" variant="contained" onClick={handleClearCompletedTask}>Clear Completed Task(s)</Button>
       </div>
+      <FormControl sx={{ m: 0, minWidth: 300 }}>
+        <InputLabel id="filter-label">Filter</InputLabel>
+        <Select
+          labelId="filter-label"
+          id="demo-simple-select"
+          value={currentFilter}
+          label="Filter"
+          onChange={handleChange}
+        >
+          <MenuItem value={"No filter"} onClick={handleFilter}>No filter</MenuItem>
+          <MenuItem value={"completed"} onClick={() => handleFilter("completed")}>Completed</MenuItem>
+          <MenuItem value={"uncompleted"} onClick={() => handleFilter("Uncompleted")}>Uncompleted</MenuItem>
+        </Select>
+      </FormControl>
       <TaskList taskList={temporaryTasks} _setTasks={setTasks} />    
     </div>
   );
