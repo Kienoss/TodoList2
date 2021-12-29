@@ -2,3 +2,19 @@
     display: grid;
     place-items: center;
 }
+
+.divInputContainer{
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+Button{
+    align-self: flex-start;
+}
+
+body{
+    background-color: white;
+}
+
