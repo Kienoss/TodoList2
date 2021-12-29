@@ -1,14 +1,14 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.css';
+//import 'bootstrap/dist/css/bootstrap.css';
 import "./TaskList.css"
 
 export default function TaskList({taskList, _setTasks}) {
+    
     const handleCheckboxCheck = (id) => {
         const currentTaskList = [...taskList];
         const findIndexOfTask = currentTaskList.findIndex((task) => {
-          return task.id == id;
+          return task.id === id;
         })
-        console.log(findIndexOfTask);
         currentTaskList[findIndexOfTask].complete = !currentTaskList[findIndexOfTask].complete;
         _setTasks(currentTaskList);
       }
@@ -19,7 +19,7 @@ export default function TaskList({taskList, _setTasks}) {
                 <tr key={index}>
                     <td className="col-1">
                         <div className="form-check form-switch">
-                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" type="checkbox" checked={task.complete} onChange={() => handleCheckboxCheck(task.id)}/>
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked={task.complete} onChange={() => handleCheckboxCheck(task.id)}/>
                         </div>
                     </td>
                     <td>{task.name}</td>
